@@ -1,0 +1,11 @@
+defaults: &defaults
+  host: localhost
+  port: 27017
+  
+development:
+  <<: *defaults
+  database: circuit_development
+
+test:
+  <<: *defaults
+  database: circuit_test
