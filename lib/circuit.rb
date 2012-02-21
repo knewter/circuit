@@ -19,14 +19,14 @@ module Circuit
   def self.default_host
     @default_host
   end
-  
+
   def self.load_hosts!(config_path="#{Rails.root}/config/circuit_hosts.yml")
     raw_file      = File.read(File.expand_path(config_path))
     hosts         = YAML.load(raw_file)[Rails.env]
     @default_host = hosts.delete("default")
     @hosts        = hosts
   end
-  
+
 end
 
 module Behaviors

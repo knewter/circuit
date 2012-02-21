@@ -37,7 +37,7 @@ module Circuit
     #     @behavior ||= super || nil
     #   end
     # end
-    
+
     def behavior
       return nil if self.behavior_klass.blank?
       behavior_klass.constantize
