@@ -19,7 +19,7 @@ module Circuit
       attr_accessor :objects
 
       def initialize(*args, &block)
-        @monitor = Monitor.new
+        @@monitor = Monitor.new
         @objects ||= []
         configure &block
         @objects.uniq!
@@ -35,7 +35,7 @@ module Circuit
       end
 
       def configure(*args)
-        @monitor.synchronize {
+        @@monitor.synchronize {
           yield(self) if block_given?
         }
       end
