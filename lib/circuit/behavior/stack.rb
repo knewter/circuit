@@ -1,23 +1,21 @@
-##
-# Template::Stacks
-# ----------------
-#
-# Template stacks are stacks of blocks that are inherited.
-# See http://guides.rubyonrails.org/rails_on_rack.html for some method examples.
-#
-# This code is originally pulled from rails middleware configs
-# https://github.com/rails/rails/raw/master/actionpack/lib/action_dispatch/middleware/stack.rb
 require 'active_support/inflector/methods'
 require 'active_support/dependencies'
 require 'monitor'
 
 module Circuit
   module Behavior
+    # Behavior::Stack
+    # ---------------
+    #
+    # Behavior stacks are stacks of middleware that are inherited.
+    #
+    # This code is originally inspired by rails middleware configs but has
+    # been altered to support inherited stacks and some other functionality.
     class Stack
       class NoSuchObjectError < Exception ;; end
-
       include Enumerable
 
+      # array of objects that the stack operates on
       attr_accessor :objects
 
       def initialize(*args, &block)
@@ -88,11 +86,18 @@ module Circuit
       end
 
     protected #######################################################################
-
+      
+      # sets objects from another stacks' objects.
+      # TODO: validate other is a kind of stack
+      # @private
       def initialize_copi(other)
         self.objects = other.objects.dup
       end
 
+      # validates the presence of the `index` object when trying to insert `where`.
+      # @raises [NoSuchObjectError] raises when the index is out of bounds or the 
+      #                             `index` does not exist in the stack.
+      # @returns [Integer]          index of the `index` object
       def assert_index(index, where)
         i = index.is_a?(Integer) ? index : objects.index(index)
         raise NoSuchObjectError, "No such stack object to insert #{where}: #{index.inspect}" unless i
