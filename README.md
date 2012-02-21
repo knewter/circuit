@@ -1,3 +1,3 @@
-# codename: circuit
+# circuit: a dynamic rack processor
 
-dynamic rack router.
+Circuit is a rack based request router backed by mongoid. 
