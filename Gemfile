@@ -17,7 +17,7 @@ group :development, :test do
   gem "mongoid-rspec",      "~> 1.4.4"
   gem "machinist",          "~> 2.0.0.beta2"
   gem "launchy"
-  gem 'simplecov',          "~> 0.5.3",       require: false
+  gem 'simplecov',          "~> 0.6.4",       require: false
   gem 'whitespace',         "~> 2.0"
 
   gem "ZenTest",            "~> 4.4.2"
